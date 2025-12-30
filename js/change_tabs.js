@@ -75,3 +75,26 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+// Mostrar u ocultar botón flotante según scroll para moviles 
+const floatingButton = document.getElementById('floating-buy-button');
+const footer = document.querySelector('footer');
+
+if (floatingButton && footer) {
+    window.addEventListener('scroll', () => {
+        const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        const footerPosition = footer.getBoundingClientRect().top;
+        
+        // Si el footer está visible en pantalla (dentro de 600px)
+        if (footerPosition < 600) {
+            floatingButton.classList.add('opacity-0', 'invisible');
+            floatingButton.classList.remove('opacity-100', 'visible');
+        } else if (scrollPercentage > 25) {
+            floatingButton.classList.remove('opacity-0', 'invisible');
+            floatingButton.classList.add('opacity-100', 'visible');
+        } else {
+            floatingButton.classList.add('opacity-0', 'invisible');
+            floatingButton.classList.remove('opacity-100', 'visible');
+        }
+    });
+}
